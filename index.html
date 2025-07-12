@@ -1,0 +1,3737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лев - Программист | Frontend, Telegram боты, Сайты</title>
+    <style>
+        /* Общие стили и сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background-color: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигация */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Обновленные стили для навигации */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo h2 {
+    color: #a855f7;
+    font-size: 2.5rem; /* Увеличиваем размер шрифта */
+    font-weight: bold;
+    margin: 0;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0; /* Убираем margin-left: auto */
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    font-size: 1rem; /* Обычный размер для пунктов меню */
+}
+
+.nav-link:hover {
+    color: #a855f7;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #8b5cf6, #a855f7);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 20px;
+    }
+
+    .nav-logo h2 {
+        font-size: 2rem; /* Уменьшаем на мобильных */
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo h2 {
+        font-size: 1.8rem;
+    }
+
+    .nav-menu {
+        gap: 0.8rem;
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+    }
+}
+
+        /* Главная секция */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #a855f7;
+            border: 2px solid #a855f7;
+        }
+
+        .btn-secondary:hover {
+            background: #a855f7;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Общие стили секций */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #a855f7;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+        }
+
+        /* Секция О себе */
+        .about {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #cccccc;
+        }
+
+        .skills {
+            margin-top: 2rem;
+        }
+
+        .skills h3 {
+            color: #a855f7;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill {
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+        }
+
+        /* Секция Услуги */
+        .services {
+            background: #0a0a0a;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.3);
+            border-color: #a855f7;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #a855f7;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        /* Секция Портфолио */
+        .portfolio {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.2);
+        }
+
+        .portfolio-image {
+            height: 300px;
+            background: linear-gradient(45deg, #2a1a4a, #4a2a6a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-image {
+            color: #a855f7;
+            font-weight: 600;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-content h3 {
+            color: #a855f7;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-content p {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .portfolio-tech span {
+            background: rgba(168, 85, 247, 0.2);
+            color: #a855f7;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Секция Блог */
+        .blog {
+            background: #0a0a0a;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-post {
+            background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.2);
+        }
+
+        .blog-date {
+            color: #a855f7;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-post h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .blog-post p {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .blog-full-text {
+            display: none;
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .read-more {
+            color: #a855f7;
+            background: none;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 0;
+        }
+
+        .read-more:hover {
+            color: #8b5cf6;
+        }
+
+        /* Секция Контакты */
+        .contacts {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+        }
+
+        .contacts-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            color: #a855f7;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #cccccc;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+        }
+
+        .contact-form h3 {
+            color: #a855f7;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #a855f7;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #888;
+        }
+
+        /* Подвал */
+        .footer {
+            background: #0a0a0a;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            text-align: center;
+        }
+
+        .footer p {
+            color: #888;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .portfolio-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contacts-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        /* Плавный скролл */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Анимация появления элементов при скролле */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <h2>IT Услуги</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#home" class="nav-link">Главная</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">О себе</a></li>
+            <li class="nav-item"><a href="#services" class="nav-link">Услуги</a></li>
+            <li class="nav-item"><a href="#portfolio" class="nav-link">Портфолио</a></li>
+            <li class="nav-item"><a href="#blog" class="nav-link">Блог</a></li>
+            <li class="nav-item"><a href="#order" class="nav-link">Заказать</a></li>
+            <li class="nav-item"><a href="#reviews" class="nav-link">Отзывы</a></li>
+            <li class="nav-item"><a href="#contacts" class="nav-link">Контакты</a></li>
+            <li class="nav-item">
+                <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">
+                    <div class="theme-icon">
+                        <span class="sun-icon">☀️</span>
+                        <span class="moon-icon">🌙</span>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <!-- Главная секция -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Привет! Я Frontend разработчик</h1>
+                <p class="hero-subtitle">Создаю современные сайты, Telegram ботов и мини-приложения</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">Мои услуги</a>
+                    <a href="#contacts" class="btn btn-secondary">Связаться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция О себе -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">О себе</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Я опытный Frontend разработчик с 3 летним опытом создания современных веб-решений.</p>
+                    <p>Специализируюсь на разработке интерактивных сайтов, Telegram ботов и мини-приложений.</p>
+                    <div class="skills">
+                        <h3>Основные навыки:</h3>
+                        <div class="skills-list">
+                            <span class="skill">HTML5</span>
+                            <span class="skill">CSS3</span>
+                            <span class="skill">JavaScript</span>
+                            <span class="skill">React</span>
+                            <span class="skill">Node.js</span>
+                            <span class="skill">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Мои услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">⌘</div>
+                    <h3>Разработка сайтов</h3>
+                    <p>Создание современных адаптивных сайтов с красивым дизайном и быстрой загрузкой</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">☆</div>
+                    <h3>Telegram боты</h3>
+                    <p>Разработка умных ботов для автоматизации бизнеса и взаимодействия с клиентами</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">◉</div>
+                    <h3>Мини-приложения</h3>
+                    <p>Создание интерактивных мини-приложений для различных платформ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Портфолио -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Портфолио</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/project1.jpg" alt="Интернет-магазин" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Интернет-магазин</h3>
+                        <p>Современный сайт электронной коммерции с адаптивным дизайном</p>
+                        <div class="portfolio-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/project2.jpg" alt="Telegram бот" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Магазин-одежды</h3>
+                        <p> Американский интернет-магазин одежды со стильным дизайном</p>
+                        <div class="portfolio-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>Node.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Блог -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title">Блог</h2>
+            <div class="blog-grid">
+                <article class="blog-post">
+                    <div class="blog-date">15 июня 2024</div>
+                    <h3>Как создать адаптивный сайт</h3>
+                    <p>Полное руководство по созданию сайтов, которые отлично выглядят на всех устройствах...</p>
+                    <div class="blog-full-text" id="blog1" style="display: none;">
+                        <p>Адаптивный веб-дизайн — это подход к созданию сайтов, который обеспечивает оптимальное отображение на любых устройствах: от мобильных телефонов до больших мониторов.</p>
+                        <p><strong>Основные принципы:</strong></p>
+                        <p>1. <strong>Flexible Grid</strong> - Используйте относительные единицы измерения (%, em, rem) вместо фиксированных пикселей.</p>
+                        <p>2. <strong>Media Queries</strong> - CSS правила, которые применяются в зависимости от размера экрана.</p>
+                        <p>3. <strong>Flexible Images</strong> - Изображения должны масштабироваться под размер контейнера.</p>
+                        <p><strong>Пример медиа-запроса:</strong></p>
+                        <p>@media (max-width: 768px) {<br>&nbsp;&nbsp;.container { padding: 10px; }<br>}</p>
+                        <p>Правильная адаптивность не только улучшает пользовательский опыт, но и положительно влияет на SEO, так как Google учитывает mobile-friendly в ранжировании.</p>
+                    </div>
+                    <button class="read-more" onclick="
+                        var fullText = document.getElementById('blog1');
+                        if (fullText.style.display === 'none' || fullText.style.display === '') {
+                            fullText.style.display = 'block';
+                            this.innerHTML = 'Скрыть';
+                        } else {
+                            fullText.style.display = 'none';
+                            this.innerHTML = 'Читать далее';
+                        }
+                    ">Читать далее</button>
+                </article>
+                <article class="blog-post">
+                    <div class="blog-date">10 июня 2024</div>
+                    <h3>Telegram боты для бизнеса</h3>
+                    <p>Зачем вашему бизнесу нужен Telegram бот и как он может увеличить продажи...</p>
+                    <div class="blog-full-text" id="blog2" style="display: none;">
+                        <p>Telegram боты становятся все более популярным инструментом для автоматизации бизнес-процессов и улучшения клиентского сервиса.</p>
+                        <p><strong>Преимущества Telegram ботов:</strong></p>
+                        <p>1. <strong>24/7 доступность</strong> - Боты работают круглосуточно без выходных.</p>
+                        <p>2. <strong>Автоматизация</strong> - Обработка заказов, ответы на FAQ, уведомления.</p>
+                        <p>3. <strong>Персонализация</strong> - Индивидуальные рекомендации и предложения.</p>
+                        <p>4. <strong>Аналитика</strong> - Отслеживание поведения пользователей и эффективности.</p>
+                        <p><strong>Типы ботов для бизнеса:</strong></p>
+                        <p>• Боты для приема заказов<br>• Боты поддержки клиентов<br>• Боты для бронирования<br>• Боты для рассылки новостей</p>
+                        <p>Правильно настроенный бот может увеличить конверсию на 25-40% и значительно снизить нагрузку на службу поддержки.</p>
+                    </div>
+                    <button class="read-more" onclick="
+                        var fullText = document.getElementById('blog2');
+                        if (fullText.style.display === 'none' || fullText.style.display === '') {
+                            fullText.style.display = 'block';
+                            this.innerHTML = 'Скрыть';
+                        } else {
+                            fullText.style.display = 'none';
+                            this.innerHTML = 'Читать далее';
+                        }
+                    ">Читать далее</button>
+                </article>
+                <article class="blog-post">
+                    <div class="blog-date">5 июня 2024</div>
+                    <h3>Тренды веб-дизайна 2024</h3>
+                    <p>Обзор актуальных трендов в веб-дизайне, которые стоит использовать в этом году...</p>
+                    <div class="blog-full-text" id="blog3" style="display: none;">
+                        <p>2024 год принес множество интересных трендов в веб-дизайне, которые формируют новые стандарты пользовательского опыта.</p>
+                        <p><strong>Главные тренды 2024:</strong></p>
+                        <p>1. <strong>Нейроморфизм</strong> - Мягкие тени и объемные элементы, имитирующие физические объекты.</p>
+                        <p>2. <strong>Темные темы</strong> - Dark mode становится стандартом для современных сайтов.</p>
+                        <p>3. <strong>Микроанимации</strong> - Тонкие анимации, улучшающие интерактивность.</p>
+                        <p>4. <strong>Минимализм+</strong> - Чистый дизайн с акцентом на функциональность.</p>
+                        <p>5. <strong>3D элементы</strong> - Использование WebGL для создания объемных эффектов.</p>
+                        <p><strong>Цветовые палитры:</strong></p>
+                        <p>• Градиенты фиолетово-синей гаммы<br>• Земляные тона<br>• Неоновые акценты<br>• Монохромные схемы</p>
+                        <p>Важно помнить, что тренды должны служить целям проекта, а не быть самоцелью. Главное — создать удобный и понятный интерфейс для пользователей.</p>
+                    </div>
+                    <button class="read-more" onclick="
+                        var fullText = document.getElementById('blog3');
+                        if (fullText.style.display === 'none' || fullText.style.display === '') {
+                            fullText.style.display = 'block';
+                            this.innerHTML = 'Скрыть';
+                        } else {
+                            fullText.style.display = 'none';
+                            this.innerHTML = 'Читать далее';
+                        }
+                    ">Читать далее</button>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- Секция Заказать услугу -->
+<section id="order" class="order">
+    <div class="container">
+        <h2 class="section-title">Заказать услугу</h2>
+        <div class="order-content">
+            <div class="order-info">
+                <h3>Быстрый заказ</h3>
+                <p>Заполните форму ниже, и я свяжусь с вами в течение 1 часа для обсуждения деталей проекта.</p>
+                <div class="order-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Бесплатная консультация</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Расчет стоимости за 24 часа</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Поддержка после запуска</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-form-container">
+                <form id="orderForm" class="order-form">
+                    <div class="form-group">
+                        <label for="clientName">Ваше имя *</label>
+                        <input type="text" id="clientName" name="clientName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientEmail">Email *</label>
+                        <input type="email" id="clientEmail" name="clientEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientPhone">Телефон</label>
+                        <input type="tel" id="clientPhone" name="clientPhone" placeholder="+7 (___) ___-__-__">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serviceType">Тип услуги *</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">Выберите услугу</option>
+                            <option value="website">Разработка сайта</option>
+                            <option value="telegram-bot">Telegram бот</option>
+                            <option value="mini-app">Мини-приложение</option>
+                            <option value="consultation">Консультация</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Примерный бюджет</label>
+                        <select id="budget" name="budget">
+                            <option value="">Выберите бюджет</option>
+                            <option value="up-to-50k">До 50 000 ₽</option>
+                            <option value="50k-100k">50 000 - 100 000 ₽</option>
+                            <option value="100k-200k">100 000 - 200 000 ₽</option>
+                            <option value="200k-plus">Свыше 200 000 ₽</option>
+                            <option value="discuss">Обсудим индивидуально</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">Желаемые сроки</label>
+                        <select id="deadline" name="deadline">
+                            <option value="">Выберите срок</option>
+                            <option value="urgent">Срочно (1-2 недели)</option>
+                            <option value="normal">Стандартно (2-4 недели)</option>
+                            <option value="planned">Планируемый (1-2 месяца)</option>
+                            <option value="flexible">Гибкие сроки</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDescription">Описание проекта *</label>
+                        <textarea id="projectDescription" name="projectDescription" rows="5"
+                                placeholder="Расскажите подробнее о вашем проекте: цели, функционал, особые требования..." required></textarea>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            <span class="checkmark"></span>
+                            Я согласен с <a href="#" class="terms-link">условиями обработки персональных данных</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-order">
+                        <span class="btn-text">Отправить заказ</span>
+                        <span class="btn-loading" style="display: none;">Отправляется...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Модальное окно подтверждения -->
+<div id="orderModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div class="modal-body">
+            <div class="success-icon">✓</div>
+            <h3>Заказ отправлен!</h3>
+            <p>Спасибо за ваш заказ! Я получил вашу заявку и свяжусь с вами в течение 1 часа.</p>
+            <p><strong>Номер заказа:</strong> <span id="orderNumber"></span></p>
+            <button class="btn btn-primary" onclick="closeOrderModal()">Понятно</button>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Стили для секции заказов */
+.order {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+    padding: 80px 0;
+}
+
+.order-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    margin-top: 2rem;
+}
+
+.order-info h3 {
+    color: #a855f7;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.order-info p {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.order-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #cccccc;
+}
+
+.feature-icon {
+    color: #a855f7;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.order-form-container {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.order-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.order-form label {
+    display: block;
+    color: #a855f7;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.order-form input,
+.order-form select,
+.order-form textarea {
+    width: 100%;
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.order-form input:focus,
+.order-form select:focus,
+.order-form textarea:focus {
+    outline: none;
+    border-color: #a855f7;
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.order-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.order-form input::placeholder,
+.order-form textarea::placeholder {
+    color: #888;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: #cccccc !important;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto !important;
+    margin: 0;
+}
+
+.terms-link {
+    color: #a855f7;
+    text-decoration: underline;
+}
+
+.terms-link:hover {
+    color: #8b5cf6;
+}
+
+.btn-order {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Модальное окно */
+.modal {
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #cccccc;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #a855f7;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #10b981, #34d399);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+}
+
+.modal-body h3 {
+    color: #a855f7;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.modal-body p {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .order-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .order-form-container {
+        padding: 1.5rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+
+/* Анимация загрузки */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading {
+    animation: spin 1s linear infinite;
+}
+</style>
+
+<script>
+// Добавляем обработчики для системы заказов
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Обработка формы заказа
+    const orderForm = document.getElementById('orderForm');
+    const orderModal = document.getElementById('orderModal');
+    const orderNumber = document.getElementById('orderNumber');
+
+    if (orderForm) {
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Получаем данные формы
+            const formData = new FormData(this);
+            const orderData = {};
+
+            // Преобразуем FormData в объект
+            for (let [key, value] of formData.entries()) {
+                orderData[key] = value;
+            }
+
+            // Проверяем обязательные поля
+            if (!orderData.clientName || !orderData.clientEmail || !orderData.serviceType || !orderData.projectDescription) {
+                alert('Пожалуйста, заполните все обязательные поля!');
+                return;
+            }
+
+            if (!document.getElementById('agreeTerms').checked) {
+                alert('Необходимо согласиться с условиями обработки персональных данных!');
+                return;
+            }
+
+            // Показываем состояние загрузки
+            const submitBtn = this.querySelector('.btn-order');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+
+            // Генерируем номер заказа
+            const orderNum = 'ORD-' + Date.now().toString().slice(-6);
+
+            // Формируем сообщение для отправки
+            const message = formatOrderMessage(orderData, orderNum);
+
+            // Симулируем отправку (здесь должна быть интеграция с вашим сервером)
+            setTimeout(() => {
+                // Логируем заказ в консоль (для разработки)
+                console.log('Новый заказ:', {
+                    orderNumber: orderNum,
+                    timestamp: new Date().toISOString(),
+                    data: orderData,
+                    message: message
+                });
+
+                // Сохраняем заказ в localStorage для демонстрации
+                saveOrder(orderNum, orderData);
+
+                // Пытаемся отправить уведомление (если есть Telegram Bot API)
+                sendTelegramNotification(message);
+
+                // Показываем модальное окно успеха
+                orderNumber.textContent = orderNum;
+                orderModal.style.display = 'flex';
+
+                // Сбрасываем форму
+                orderForm.reset();
+
+                // Возвращаем кнопку в исходное состояние
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+
+            }, 2000);
+        });
+    }
+
+    // Форматирование сообщения о заказе
+    function formatOrderMessage(data, orderNum) {
+        const serviceTypes = {
+            'website': 'Разработка сайта',
+            'telegram-bot': 'Telegram бот',
+            'mini-app': 'Мини-приложение',
+            'consultation': 'Консультация',
+            'other': 'Другое'
+        };
+
+        const budgets = {
+            'up-to-5k': 'До 5000 ₽',
+            '5k-10k': '5000 - 10000 ₽',
+            '10k-20k': '10000 - 20000 ₽',
+            '20k-plus': 'Свыше 20000 ₽',
+            'discuss': 'Обсудим индивидуально'
+        };
+
+        const deadlines = {
+            'urgent': 'Срочно (1-2 недели)',
+            'normal': 'Стандартно (2-4 недели)',
+            'planned': 'Планируемый (1-2 месяца)',
+            'flexible': 'Гибкие сроки'
+        };
+
+        return `🔔 НОВЫЙ ЗАКАЗ #${orderNum}
+
+👤 Клиент: ${data.clientName}
+📧 Email: ${data.clientEmail}
+📱 Телефон: ${data.clientPhone || 'Не указан'}
+
+🎯 Услуга: ${serviceTypes[data.serviceType] || data.serviceType}
+💰 Бюджет: ${budgets[data.budget] || 'Не указан'}
+⏰ Сроки: ${deadlines[data.deadline] || 'Не указаны'}
+
+📝 Описание проекта:
+${data.projectDescription}
+
+⏰ Время заказа: ${new Date().toLocaleString('ru-RU')}`;
+    }
+
+    // Сохранение заказа в localStorage
+    function saveOrder(orderNum, data) {
+        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        orders.push({
+            orderNumber: orderNum,
+            timestamp: new Date().toISOString(),
+            data: data,
+            status: 'new'
+        });
+        localStorage.setItem('orders', JSON.stringify(orders));
+    }
+
+    // Отправка уведомления в Telegram (требует настройки бота)
+    function sendTelegramNotification(message) {
+        // Здесь должны быть ваши данные Telegram бота
+        const TELEGRAM_BOT_TOKEN = '7827488907:AAHAcEq8-c9LPHTWyInBU0e22ofNb9dTNSM'; // Замените на токен вашего бота
+        const TELEGRAM_CHAT_ID = '7236376615';     // Замените на ваш chat_id
+
+        if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID &&
+            TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN' &&
+            TELEGRAM_CHAT_ID !== 'YOUR_CHAT_ID') {
+
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Уведомление отправлено в Telegram');
+                } else {
+                    console.log('Ошибка отправки уведомления в Telegram');
+                }
+            }).catch(error => {
+                console.log('Ошибка отправки уведомления:', error);
+            });
+        } else {
+            console.log('Telegram бот не настроен. Сообщение сохранено локально.');
+        }
+    }
+
+    // Обработка закрытия модального окна
+    window.closeOrderModal = function() {
+        orderModal.style.display = 'none';
+    }
+
+    // Закрытие модального окна по клику на крестик или вне окна
+    if (orderModal) {
+        const closeBtn = orderModal.querySelector('.modal-close');
+
+        closeBtn.addEventListener('click', closeOrderModal);
+
+        orderModal.addEventListener('click', function(e) {
+            if (e.target === orderModal) {
+                closeOrderModal();
+            }
+        });
+    }
+
+    // Маска для телефона
+    const phoneInput = document.getElementById('clientPhone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('8')) value = '7' + value.slice(1);
+            if (value.startsWith('7')) {
+                value = value.slice(0, 11);
+                const formatted = value.replace(/^7(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/, function(match, g1, g2, g3, g4) {
+                    let result = '+7';
+                    if (g1) result += ` (${g1}`;
+                    if (g2) result += `) ${g2}`;
+                    if (g3) result += `-${g3}`;
+                    if (g4) result += `-${g4}`;
+                    return result;
+                });
+                e.target.value = formatted;
+            }
+        });
+    }
+
+    // Функция для просмотра заказов (для админа)
+    window.viewOrders = function() {
+        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        if (orders.length === 0) {
+            alert('Заказов пока нет');
+            return;
+        }
+
+        let ordersText = '📋 СПИСОК ЗАКАЗОВ:\n\n';
+        orders.forEach((order, index) => {
+            ordersText += `${index + 1}. Заказ #${order.orderNumber}\n`;
+            ordersText += `   Клиент: ${order.data.clientName}\n`;
+            ordersText += `   Email: ${order.data.clientEmail}\n`;
+            ordersText += `   Дата: ${new Date(order.timestamp).toLocaleString('ru-RU')}\n`;
+            ordersText += `   Статус: ${order.status}\n\n`;
+        });
+
+        console.log(ordersText);
+        alert('Список заказов выведен в консоль (F12)');
+    };
+
+    // Добавляем ссылку на заказы в навигацию
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu) {
+        const orderNavItem = document.createElement('li');
+        orderNavItem.className = 'nav-item';
+        orderNavItem.innerHTML = '<a href="#order" class="nav-link">Заказать</a>';
+        navMenu.appendChild(orderNavItem);
+    }
+});
+</script>
+
+    <!-- Секция Контакты -->
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contacts-content">
+                <div class="contact-info">
+                    <h3>Свяжитесь со мной</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉︎</span>
+                        <span>o08LeV80o@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">☎︎</span>
+                        <span>+7 (952) 720-43-23</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"> ✈︎</span>
+                        <span>@dorm990</span>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Напишите мне</h3>
+                    <form>
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="email" placeholder="Ваш email" required>
+                        <textarea placeholder="Ваше сообщение" required></textarea>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-- AI Чат-ассистент -->
+<div id="chatWidget" class="chat-widget">
+    <div id="chatButton" class="chat-button" onclick="toggleChat()">
+        <div class="chat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.36 14.99 3 16.28L2 22L7.72 21C9.01 21.64 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="currentColor"/>
+                <circle cx="8.5" cy="12" r="1.5" fill="white"/>
+                <circle cx="12" cy="12" r="1.5" fill="white"/>
+                <circle cx="15.5" cy="12" r="1.5" fill="white"/>
+            </svg>
+        </div>
+        <div class="chat-pulse"></div>
+    </div>
+
+    <div id="chatContainer" class="chat-container" style="display: none;">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">
+                    <div class="avatar-icon">🤖</div>
+                </div>
+                <div class="chat-header-text">
+                    <h4>AI Ассистент</h4>
+                    <span class="chat-status" id="chatStatus">
+                        <span id="statusText">Загрузка...</span>
+                    </span>
+                </div>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M13.5 4.5L4.5 13.5M4.5 4.5L13.5 13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="chatMessages" class="chat-messages">
+            <div class="message assistant-message">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <p>Привет! Я AI-ассистент Льва. Помогу вам:</p>
+                    <ul>
+                        <li>📱 Выбрать подходящую услугу</li>
+                        <li>💰 Рассчитать стоимость проекта</li>
+                        <li>⏱️ Узнать сроки разработки</li>
+                        <li>❓ Ответить на любые вопросы</li>
+                    </ul>
+                    <p><strong>Могу общаться на любые темы!</strong> 🧠</p>
+                    <p>О чем хотите поговорить?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-quick-buttons">
+            <button class="quick-btn" onclick="sendQuickMessage('Сколько стоит сайт?')">💰 Стоимость сайта</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Как создать Telegram бота?')">🤖 Telegram бот</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Какие сроки разработки?')">⏱️ Сроки</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Покажи отзывы клиентов')">⭐ Отзывы</button>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <input type="text" id="chatInput" placeholder="Напишите ваш вопрос..." maxlength="500">
+                <button id="sendButton" onclick="sendMessage()" disabled>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="chat-typing" id="typingIndicator" style="display: none;">
+                <span>AI печатает</span>
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Стили для чат-ассистента */
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'Arial', sans-serif;
+}
+
+.chat-button {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    animation: chatPulse 2s infinite;
+}
+
+.chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(168, 85, 247, 0.6);
+}
+
+.chat-icon {
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.chat-button:hover .chat-icon {
+    transform: scale(1.1);
+}
+
+.chat-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(168, 85, 247, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+@keyframes chatPulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(168, 85, 247, 0.6), 0 0 0 10px rgba(168, 85, 247, 0.1);
+    }
+}
+
+.chat-container {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 380px;
+    height: 500px;
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.chat-header {
+    background: linear-gradient(90deg, #8b5cf6, #a855f7);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-icon {
+    font-size: 20px;
+}
+
+.chat-header-text h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.chat-status {
+    font-size: 12px;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.chat-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: statusBlink 2s infinite;
+}
+
+@keyframes statusBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.chat-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.chat-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.5);
+    border-radius: 2px;
+}
+
+.message {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    animation: messageSlide 0.3s ease-out;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-message {
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.assistant-message .message-avatar {
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+}
+
+.user-message .message-avatar {
+    background: linear-gradient(45deg, #10b981, #34d399);
+    color: white;
+    font-weight: bold;
+}
+
+.message-content {
+    max-width: 250px;
+    padding: 12px 16px;
+    border-radius: 18px;
+    color: white;
+    line-height: 1.4;
+}
+
+.assistant-message .message-content {
+    background: rgba(168, 85, 247, 0.2);
+    border-bottom-left-radius: 6px;
+}
+
+.user-message .message-content {
+    background: rgba(16, 185, 129, 0.2);
+    border-bottom-right-radius: 6px;
+}
+
+.message-content p {
+    margin: 0 0 8px 0;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message-content ul {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.message-content li {
+    margin: 4px 0;
+}
+
+.chat-quick-buttons {
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-btn {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.quick-btn:hover {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: #a855f7;
+    transform: translateY(-1px);
+}
+
+.chat-input-container {
+    padding: 20px;
+    border-top: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.chat-input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#chatInput {
+    flex: 1;
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 25px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#chatInput:focus {
+    border-color: #a855f7;
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+#chatInput::placeholder {
+    color: #888;
+}
+
+#sendButton {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+#sendButton:hover:not(:disabled) {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+#sendButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chat-typing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    color: #a855f7;
+    font-size: 12px;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 3px;
+}
+
+.typing-dots span {
+    width: 4px;
+    height: 4px;
+    background: #a855f7;
+    border-radius: 50%;
+    animation: typingDot 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typingDot {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-8px);
+        opacity: 1;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .chat-widget {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .chat-container {
+        width: calc(100vw - 30px);
+        max-width: 350px;
+        height: 450px;
+        bottom: 75px;
+        right: -15px;
+    }
+
+    .message-content {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-container {
+        width: calc(100vw - 20px);
+        right: -10px;
+        height: 400px;
+    }
+
+    .quick-btn {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+</style>
+
+<!-- ПОЛНЫЙ КОД AI-ЧАТА - ЗАМЕНИТЕ СУЩЕСТВУЮЩИЙ -->
+<script>
+// AI Чат-ассистент логика
+let chatOpen = false;
+let conversationHistory = [];
+
+// ⚠️ ВАЖНО: ВСТАВЬТЕ ЗДЕСЬ ВАШ НОВЫЙ OPENAI API КЛЮЧ ⚠️
+// Получите новый ключ на: https://platform.openai.com/api-keys
+const OPENAI_API_KEY = 'ВСТАВЬТЕ_СЮДА_ВАШ_НОВЫЙ_API_КЛЮЧ';
+
+const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+
+// Системный промпт для AI ассистента
+const SYSTEM_PROMPT = `Ты AI-ассистент на сайте Льва - Frontend разработчика. Твоя задача помогать посетителям сайта.
+
+ИНФОРМАЦИЯ О ЛЬВЕ:
+- Опытный Frontend разработчик с 3-летним опытом
+- Специализируется на: современных сайтах, Telegram ботах, мини-приложениях
+- Контакты: Email: o08LeV80o@gmail.com, Телефон: +7 (952) 720-43-23, Telegram: @dorm990
+- Отличные отзывы клиентов: средняя оценка 4.9/5 из 15+ отзывов
+
+УСЛУГИ И ЦЕНЫ:
+1. Разработка сайтов: от 30,000 ₽, сроки 2-4 недели
+2. Telegram боты: от 15,000 ₽, сроки 1-2 недели
+3. Мини-приложения: от 25,000 ₽, сроки 2-3 недели
+
+ТЕХНОЛОГИИ: HTML5, CSS3, JavaScript, React, Node.js, Python, PostgreSQL, MongoDB
+
+ВАЖНО:
+- Отвечай дружелюбно и профессионально
+- Используй эмодзи для живости общения
+- При вопросах о заказе направляй к форме "Заказать услугу" или контактам
+- При вопросах об отзывах направляй к секции "Отзывы" где можно посмотреть отзывы клиентов и оставить свой
+- Можешь общаться на любые темы, но всегда помни о своей роли ассистента разработчика
+- Отвечай на русском языке
+- Если не знаешь что-то конкретное о Льве или услугах, честно скажи об этом
+
+Будь полезным, дружелюбным и профессиональным помощником!`;
+
+// База знаний для резервных ответов
+const knowledgeBase = {
+    services: {
+        website: {
+            name: "Разработка сайтов",
+            price: "от 30,000 ₽",
+            time: "2-4 недели",
+            description: "Создаю современные адаптивные сайты с красивым дизайном и быстрой загрузкой"
+        },
+        bot: {
+            name: "Telegram боты",
+            price: "от 15,000 ₽",
+            time: "1-2 недели",
+            description: "Разрабатываю умных ботов для автоматизации бизнеса и взаимодействия с клиентами"
+        },
+        app: {
+            name: "Мини-приложения",
+            price: "от 25,000 ₽",
+            time: "2-3 недели",
+            description: "Создаю интерактивные мини-приложения для различных платформ"
+        }
+    },
+
+    faq: {
+        "сколько стоит": "Стоимость зависит от сложности проекта:\n• Простой сайт: 30,000-50,000 ₽\n• Telegram бот: 15,000-40,000 ₽\n• Мини-приложение: 25,000-60,000 ₽\n\nТочную стоимость рассчитаю после обсуждения ваших требований.",
+
+        "сколько времени": "Сроки разработки:\n• Простой сайт: 2-3 недели\n• Сложный сайт: 3-6 недель\n• Telegram бот: 1-2 недели\n• Мини-приложение: 2-4 недели\n\nСроки могут варьироваться в зависимости от сложности проекта.",
+
+        "связаться": "Связаться со мной можно:\n📧 Email: o08LeV80o@gmail.com\n📱 Телефон: +7 (952) 720-43-23\n✈️ Telegram: @dorm990\n\nОтвечаю в течение 1-2 часов в рабочее время.",
+
+        "отзывы": "📝 **Отзывы клиентов о Льве:**\n\n⭐ Средняя оценка: **4.9/5**\n👥 Более **15 отзывов** от реальных клиентов\n✅ **93% положительных** оценок\n\n**Последние отзывы:**\n• \"Отличная работа! Сайт превзошел ожидания\" ⭐⭐⭐⭐⭐\n• \"Telegram бот увеличил продажи на 30%\" ⭐⭐⭐⭐⭐\n• \"Профессиональный подход, всё в срок\" ⭐⭐⭐⭐⭐\n\n🔍 Посмотреть все отзывы можно в разделе **\"Отзывы\"** на сайте!\n\nТам же вы сможете оставить свой отзыв после работы с Львом 😊"
+    }
+};
+
+// Генерация ответа через OpenAI API
+async function generateAIResponse(userMessage) {
+    // Проверяем наличие API ключа
+    if (!OPENAI_API_KEY || OPENAI_API_KEY === 'ВСТАВЬТЕ_СЮДА_ВАШ_НОВЫЙ_API_КЛЮЧ') {
+        return getFallbackResponse(userMessage);
+    }
+
+    try {
+        // Подготавливаем историю разговора для контекста
+        const messages = [
+            { role: 'system', content: SYSTEM_PROMPT }
+        ];
+
+        // Добавляем последние 10 сообщений для контекста
+        const recentHistory = conversationHistory.slice(-10);
+        recentHistory.forEach(msg => {
+            messages.push({
+                role: msg.sender === 'user' ? 'user' : 'assistant',
+                content: msg.content
+            });
+        });
+
+        // Добавляем текущее сообщение пользователя
+        messages.push({ role: 'user', content: userMessage });
+
+        // Отправляем запрос к OpenAI
+        const response = await fetch(OPENAI_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${OPENAI_API_KEY}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo',
+                messages: messages,
+                max_tokens: 500,
+                temperature: 0.7,
+                top_p: 1,
+                frequency_penalty: 0,
+                presence_penalty: 0
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+            return data.choices[0].message.content.trim();
+        } else {
+            throw new Error('Неожиданный формат ответа от API');
+        }
+
+    } catch (error) {
+        console.error('Ошибка OpenAI API:', error);
+
+        // В случае ошибки возвращаем fallback ответ
+        return getFallbackResponse(userMessage) + '\n\n⚠️ Сейчас работаю в базовом режиме из-за технических неполадок.';
+    }
+}
+
+// Резервные ответы если OpenAI недоступен
+function getFallbackResponse(userMessage) {
+    const message = userMessage.toLowerCase();
+
+    // Приветствие
+    if (message.includes('привет') || message.includes('здравствуй') || message.includes('добрый')) {
+        return "Привет! 👋 Я AI-ассистент Льва. Помогу вам узнать всё о наших услугах разработки. О чём хотите поговорить?";
+    }
+
+    // ОТЗЫВЫ - новый блок
+    if (message.includes('отзыв') || message.includes('отзывы') || message.includes('мнение') || message.includes('репутация') || message.includes('клиент')) {
+        return knowledgeBase.faq["отзывы"];
+    }
+
+    // Поиск в базе знаний
+    for (const [key, answer] of Object.entries(knowledgeBase.faq)) {
+        if (message.includes(key)) {
+            return answer;
+        }
+    }
+
+    // Вопросы о конкретных услугах
+    if (message.includes('сайт') || message.includes('веб')) {
+        const service = knowledgeBase.services.website;
+        return `🌐 ${service.name}\n\n💰 Стоимость: ${service.price}\n⏱️ Сроки: ${service.time}\n\n${service.description}\n\nХотите узнать подробнее или заказать? Переходите в раздел "Заказать услугу"!`;
+    }
+
+    if (message.includes('бот') || message.includes('telegram')) {
+        const service = knowledgeBase.services.bot;
+        return `🤖 ${service.name}\n\n💰 Стоимость: ${service.price}\n⏱️ Сроки: ${service.time}\n\n${service.description}\n\nТelegram боты отлично подходят для автоматизации бизнеса!`;
+    }
+
+    if (message.includes('приложение') || message.includes('мини-апп')) {
+        const service = knowledgeBase.services.app;
+        return `📱 ${service.name}\n\n💰 Стоимость: ${service.price}\n⏱️ Сроки: ${service.time}\n\n${service.description}\n\nИдеально для создания интерактивных решений!`;
+    }
+
+    // Контакты
+    if (message.includes('контакт') || message.includes('связь') || message.includes('телефон') || message.includes('email')) {
+        return knowledgeBase.faq["связаться"];
+    }
+
+    // Заказ
+    if (message.includes('заказ') || message.includes('хочу') || message.includes('нужен') || message.includes('сделать')) {
+        return "Отлично! 🎯 Для оформления заказа:\n\n1. Заполните форму в разделе 'Заказать услугу'\n2. Или свяжитесь напрямую:\n   📱 +7 (952) 720-43-23\n   ✈️ @dorm990\n\nЯ свяжусь с вами в течение часа для обсуждения деталей!";
+    }
+
+    // Спасибо
+    if (message.includes('спасибо') || message.includes('благодар')) {
+        return "Всегда пожалуйста! 😊 Если возникнут ещё вопросы - обращайтесь. Готов помочь с вашим проектом!";
+    }
+
+    // До свидания
+    if (message.includes('пока') || message.includes('до свидания') || message.includes('всего')) {
+        return "До встречи! 👋 Буду рад помочь с вашим проектом. Успехов вам!";
+    }
+
+    // Если не найден подходящий ответ
+    const defaultResponses = [
+        "Интересный вопрос! 🤔 Могу рассказать о:\n• Разработке сайтов\n• Telegram ботах\n• Мини-приложениях\n• Стоимости и сроках\n• Отзывах клиентов\n\nО чём хотите узнать подробнее?",
+        "Не совсем понял ваш вопрос 😅 Попробуйте спросить о:\n• Услугах разработки\n• Стоимости проектов\n• Сроках выполнения\n• Портфолио\n• Отзывах клиентов\n\nИли просто свяжитесь с Львом напрямую!",
+        "Хм, возможно, стоит переформулировать вопрос? 🤷‍♂️\n\nЯ хорошо разбираюсь в:\n✅ Веб-разработке\n✅ Telegram ботах\n✅ Ценах и сроках\n✅ Процессе работы\n✅ Отзывах клиентов"
+    ];
+
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+}
+
+// Инициализация чата
+document.addEventListener('DOMContentLoaded', function() {
+    const chatInput = document.getElementById('chatInput');
+    const sendButton = document.getElementById('sendButton');
+
+    // Проверяем элементы чата
+    if (!chatInput || !sendButton) {
+        console.log('Элементы чата не найдены');
+        return;
+    }
+
+    // Проверяем статус API при загрузке
+    checkAPIStatus();
+
+    // Обработка ввода
+    chatInput.addEventListener('input', function() {
+        const hasText = this.value.trim().length > 0;
+        sendButton.disabled = !hasText;
+    });
+
+    // Отправка по Enter
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey && this.value.trim()) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+});
+
+// Проверка статуса OpenAI API
+async function checkAPIStatus() {
+    const statusElement = document.getElementById('statusText');
+
+    if (!statusElement) {
+        console.log('Элемент статуса не найден');
+        return;
+    }
+
+    if (!OPENAI_API_KEY || OPENAI_API_KEY === 'ВСТАВЬТЕ_СЮДА_ВАШ_НОВЫЙ_API_КЛЮЧ') {
+        statusElement.textContent = 'Базовый режим';
+        statusElement.parentElement.style.color = '#fbbf24';
+        return;
+    }
+
+    try {
+        // Простой тестовый запрос для проверки API
+        const response = await fetch(OPENAI_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${OPENAI_API_KEY}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo',
+                messages: [{ role: 'user', content: 'test' }],
+                max_tokens: 1
+            })
+        });
+
+        if (response.ok) {
+            statusElement.textContent = 'AI режим активен';
+            statusElement.parentElement.style.color = '#10b981';
+        } else {
+            throw new Error('API недоступен');
+        }
+    } catch (error) {
+        statusElement.textContent = 'Базовый режим';
+        statusElement.parentElement.style.color = '#fbbf24';
+        console.log('OpenAI API недоступен, используется базовый режим');
+    }
+}
+
+// Переключение чата
+function toggleChat() {
+    const chatContainer = document.getElementById('chatContainer');
+    const chatButton = document.getElementById('chatButton');
+
+    if (!chatContainer || !chatButton) {
+        console.log('Элементы чата не найдены');
+        return;
+    }
+
+    chatOpen = !chatOpen;
+
+    if (chatOpen) {
+        chatContainer.style.display = 'flex';
+        chatButton.style.transform = 'scale(0.9)';
+        const chatInput = document.getElementById('chatInput');
+        if (chatInput) chatInput.focus();
+    } else {
+        chatContainer.style.display = 'none';
+        chatButton.style.transform = 'scale(1)';
+    }
+}
+
+// Быстрые сообщения
+async function sendQuickMessage(message) {
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.value = message;
+        await sendMessage();
+    }
+}
+
+// Отправка сообщения
+async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    if (!input) return;
+
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Добавляем сообщение пользователя
+    addMessage(message, 'user');
+
+    // Очищаем поле ввода
+    input.value = '';
+    const sendButton = document.getElementById('sendButton');
+    if (sendButton) sendButton.disabled = true;
+
+    // Показываем индикатор печати
+    showTypingIndicator();
+
+    try {
+        // Генерируем ответ с помощью AI
+        const response = await generateAIResponse(message);
+        hideTypingIndicator();
+        addMessage(response, 'assistant');
+    } catch (error) {
+        console.error('Ошибка генерации ответа:', error);
+        hideTypingIndicator();
+        addMessage('Извините, произошла ошибка. Попробуйте еще раз или свяжитесь с нами напрямую: +7 (952) 720-43-23', 'assistant');
+    }
+}
+
+// Добавление сообщения в чат
+function addMessage(content, sender) {
+    const messagesContainer = document.getElementById('chatMessages');
+    if (!messagesContainer) return;
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+
+    const avatar = sender === 'user' ? '👤' : '🤖';
+
+    messageDiv.innerHTML = `
+        <div class="message-avatar">${avatar}</div>
+        <div class="message-content">
+            <p>${content.replace(/\n/g, '<br>')}</p>
+        </div>
+    `;
+
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Добавляем в историю
+    conversationHistory.push({
+        sender: sender,
+        content: content,
+        timestamp: new Date()
+    });
+}
+
+// Показать индикатор печати
+function showTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) indicator.style.display = 'flex';
+}
+
+// Скрыть индикатор печати
+function hideTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) indicator.style.display = 'none';
+}
+
+// Инициализация чата при загрузке
+window.addEventListener('load', function() {
+    // Показываем уведомление о чате через 10 секунд
+    setTimeout(() => {
+        if (!chatOpen) {
+            const chatButton = document.getElementById('chatButton');
+            if (chatButton) {
+                chatButton.style.animation = 'chatPulse 1s infinite, bounce 0.5s ease-in-out';
+
+                setTimeout(() => {
+                    chatButton.style.animation = 'chatPulse 2s infinite';
+                }, 3000);
+            }
+        }
+    }, 10000);
+});
+
+// Анимация подпрыгивания
+const bounceKeyframes = `
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+    }
+`;
+
+// Добавляем анимацию в стили
+const style = document.createElement('style');
+style.textContent = bounceKeyframes;
+document.head.appendChild(style);
+</script>
+<!-- СЕКЦИЯ ОТЗЫВОВ - ДОБАВИТЬ ПЕРЕД КОНТАКТАМИ -->
+<section id="reviews" class="reviews">
+    <div class="container">
+        <h2 class="section-title">Отзывы клиентов</h2>
+
+        <!-- Статистика отзывов -->
+        <div class="reviews-stats">
+            <div class="stats-item">
+                <div class="stats-number" id="totalReviews">15</div>
+                <div class="stats-label">Отзывов</div>
+            </div>
+            <div class="stats-item">
+                <div class="stats-number" id="averageRating">4.9</div>
+                <div class="stats-label">Средняя оценка</div>
+            </div>
+            <div class="stats-item">
+                <div class="stats-number">93%</div>
+                <div class="stats-label">Довольных клиентов</div>
+            </div>
+        </div>
+
+        <!-- Фильтры отзывов -->
+        <div class="reviews-filters">
+            <button class="filter-btn active" onclick="filterReviews('all')">Все отзывы</button>
+            <button class="filter-btn" onclick="filterReviews(5)">⭐⭐⭐⭐⭐</button>
+            <button class="filter-btn" onclick="filterReviews(4)">⭐⭐⭐⭐</button>
+            <button class="filter-btn" onclick="filterReviews(3)">⭐⭐⭐</button>
+            <button class="filter-btn" onclick="filterReviews(2)">⭐⭐</button>
+            <button class="filter-btn" onclick="filterReviews(1)">⭐</button>
+        </div>
+
+        <!-- Список отзывов -->
+        <div class="reviews-grid" id="reviewsGrid">
+            <!-- Отзывы будут добавлены через JavaScript -->
+        </div>
+
+        <!-- Форма добавления отзыва -->
+        <div class="add-review-section">
+            <h3>Оставить отзыв</h3>
+            <form id="reviewForm" class="review-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reviewName">Ваше имя *</label>
+                        <input type="text" id="reviewName" name="reviewName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewEmail">Email</label>
+                        <input type="email" id="reviewEmail" name="reviewEmail" placeholder="Не публикуется">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewService">Услуга</label>
+                    <select id="reviewService" name="reviewService">
+                        <option value="">Выберите услугу (необязательно)</option>
+                        <option value="Разработка сайта">Разработка сайта</option>
+                        <option value="Telegram бот">Telegram бот</option>
+                        <option value="Мини-приложение">Мини-приложение</option>
+                        <option value="Консультация">Консультация</option>
+                        <option value="Другое">Другое</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Оценка *</label>
+                    <div class="rating-input" id="ratingInput">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <input type="hidden" id="reviewRating" name="reviewRating" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewText">Ваш отзыв *</label>
+                    <textarea id="reviewText" name="reviewText" rows="4" placeholder="Поделитесь своими впечатлениями о работе..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Опубликовать отзыв</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- СТИЛИ ДЛЯ СЕКЦИИ ОТЗЫВОВ -->
+<style>
+/* Секция Отзывы */
+.reviews {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+    padding: 80px 0;
+}
+
+.reviews-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0 3rem;
+    text-align: center;
+}
+
+.stats-item {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 2rem 1rem;
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.stats-item:hover {
+    transform: translateY(-5px);
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #a855f7;
+    margin-bottom: 0.5rem;
+}
+
+.stats-label {
+    color: #cccccc;
+    font-size: 0.9rem;
+}
+
+.reviews-filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+    padding: 8px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: #a855f7;
+    transform: translateY(-2px);
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.review-card {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(168, 85, 247, 0.2);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.review-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.author-info h4 {
+    color: white;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.author-info .review-service {
+    color: #a855f7;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.review-rating {
+    display: flex;
+    gap: 2px;
+    font-size: 1.2rem;
+}
+
+.review-rating .star {
+    color: #fbbf24;
+}
+
+.review-rating .star.empty {
+    color: #374151;
+}
+
+.review-text {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.review-date {
+    color: #888;
+    font-size: 0.85rem;
+    text-align: right;
+}
+
+.review-verified {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Форма добавления отзыва */
+.add-review-section {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    margin-top: 3rem;
+}
+
+.add-review-section h3 {
+    color: #a855f7;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.review-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.review-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.review-form label {
+    display: block;
+    color: #a855f7;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.review-form input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+    outline: none;
+    border-color: #a855f7;
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.review-form input::placeholder,
+.review-form textarea::placeholder {
+    color: #888;
+}
+
+.rating-input {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.rating-input .star {
+    font-size: 2rem;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.rating-input .star:hover,
+.rating-input .star.active {
+    color: #fbbf24;
+    transform: scale(1.1);
+}
+
+/* Адаптивность для отзывов */
+@media (max-width: 768px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .review-form .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .reviews-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .stats-number {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<!-- JAVASCRIPT ДЛЯ РАБОТЫ С ОТЗЫВАМИ -->
+<script>
+// СИСТЕМА ОТЗЫВОВ
+let reviews = [];
+let currentFilter = 'all';
+
+// Предустановленные отзывы
+const defaultReviews = [
+    {
+        id: 1,
+        name: "Анна Петрова",
+        service: "Разработка сайта",
+        rating: 5,
+        text: "Отличная работа! Лев создал для нашей компании потрясающий сайт. Все было сделано в срок, дизайн превзошел ожидания. Очень профессиональный подход!",
+        date: "2025-06-15",
+        verified: true
+    },
+    {
+        id: 2,
+        name: "Максим Сидоров",
+        service: "Telegram бот",
+        rating: 5,
+        text: "Заказывал бота для своего интернет-магазина. Получился именно то, что нужно! Теперь клиенты могут оформлять заказы прямо в Telegram. Рекомендую!",
+        date: "2025-06-10",
+        verified: true
+    },
+    {
+        id: 3,
+        name: "Екатерина Волкова",
+        service: "Разработка сайта",
+        rating: 5,
+        text: "Потрясающий результат! Сайт получился современный, быстрый и красивый. Лев очень отзывчивый, всегда на связи. Спасибо за отличную работу!",
+        date: "2025-06-08",
+        verified: true
+    },
+    {
+        id: 4,
+        name: "Дмитрий Козлов",
+        service: "Мини-приложение",
+        rating: 5,
+        text: "Заказывал разработку калькулятора для нашего сайта. Все сделано качественно и в срок. Приложение работает без сбоев, клиенты довольны!",
+        date: "2025-06-05",
+        verified: true
+    },
+    {
+        id: 5,
+        name: "Ольга Морозова",
+        service: "Разработка сайта",
+        rating: 5,
+        text: "Лев - настоящий профессионал! Создал сайт для моего салона красоты. Получилось очень стильно и функционально. Клиенты в восторге!",
+        date: "2025-06-02",
+        verified: true
+    },
+    {
+        id: 6,
+        name: "Александр Новиков",
+        service: "Telegram бот",
+        rating: 4,
+        text: "Хороший специалист, сделал бота для нашего ресторана. Единственное - хотелось бы больше дополнительных функций, но в целом все отлично!",
+        date: "2025-05-30",
+        verified: true
+    },
+    {
+        id: 7,
+        name: "Мария Белова",
+        service: "Разработка сайта",
+        rating: 5,
+        text: "Заказывала сайт-портфолио. Результат превзошел все ожидания! Очень красивый дизайн, адаптивная верстка. Лев учел все мои пожелания.",
+        date: "2025-05-28",
+        verified: true
+    },
+    {
+        id: 8,
+        name: "Игорь Кузнецов",
+        service: "Мини-приложение",
+        rating: 5,
+        text: "Отличная работа! Разработал для нас конвертер валют. Все работает быстро и точно. Очень доволен результатом!",
+        date: "2025-05-25",
+        verified: true
+    },
+    {
+        id: 9,
+        name: "Наталья Федорова",
+        service: "Разработка сайта",
+        rating: 5,
+        text: "Лев создал замечательный сайт для нашего детского центра. Яркий, удобный, с простой навигацией. Родители легко находят всю информацию!",
+        date: "2025-05-22",
+        verified: true
+    },
+    {
+        id: 10,
+        name: "Сергей Иванов",
+        service: "Telegram бот",
+        rating: 5,
+        text: "Заказывал бота для автоматизации продаж. Получилось супер! Теперь клиенты могут заказывать товары 24/7. Продажи выросли на 30%!",
+        date: "2025-05-20",
+        verified: true
+    },
+    {
+        id: 11,
+        name: "Елена Смирнова",
+        service: "Разработка сайта",
+        rating: 5,
+        text: "Профессиональный подход на всех этапах работы. Сайт получился именно таким, как мы хотели. Быстрая загрузка, красивый дизайн!",
+        date: "2025-05-18",
+        verified: true
+    },
+    {
+        id: 12,
+        name: "Владимир Попов",
+        service: "Мини-приложение",
+        rating: 4,
+        text: "Хорошая работа! Создал для нас калькулятор стоимости услуг. Работает корректно, интерфейс понятный. Небольшие замечания по дизайну, но в целом отлично!",
+        date: "2025-05-15",
+        verified: true
+    },
+    {
+        id: 13,
+        name: "Татьяна Орлова",
+        service: "Разработка сайта",
+        rating: 5,
+        text: "Восхитительная работа! Лев создал сайт для моего интернет-магазина украшений. Элегантный дизайн, удобная корзина, быстрая работа!",
+        date: "2025-05-12",
+        verified: true
+    },
+    {
+        id: 14,
+        name: "Андрей Лебедев",
+        service: "Telegram бот",
+        rating: 5,
+        text: "Отличный бот для нашей службы доставки! Клиенты могут отследить заказ, получить уведомления. Все работает как часы!",
+        date: "2025-05-10",
+        verified: true
+    },
+    {
+        id: 15,
+        name: "Михаил Григорьев",
+        service: "Разработка сайта",
+        rating: 2,
+        text: "К сожалению, остался не очень доволен результатом. Сайт был готов с задержкой, некоторые функции работали нестабильно. Хотя в итоге все исправили.",
+        date: "2025-05-08",
+        verified: true
+    }
+];
+
+// Инициализация отзывов при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    initializeReviews();
+});
+
+// Инициализация отзывов
+function initializeReviews() {
+    // Загружаем отзывы из localStorage или используем предустановленные
+    const savedReviews = localStorage.getItem('clientReviews');
+    if (savedReviews) {
+        reviews = JSON.parse(savedReviews);
+    } else {
+        reviews = defaultReviews;
+        saveReviews();
+    }
+
+    // Инициализируем форму отзыва
+    initializeReviewForm();
+
+    // Отображаем отзывы
+    displayReviews();
+    updateStats();
+}
+
+// Инициализация формы отзыва
+function initializeReviewForm() {
+    const ratingStars = document.querySelectorAll('.rating-input .star');
+    const ratingInput = document.getElementById('reviewRating');
+    const reviewForm = document.getElementById('reviewForm');
+
+    if (!ratingStars.length || !reviewForm) return;
+
+    // Обработка клика по звездам
+    ratingStars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.dataset.rating);
+            ratingInput.value = rating;
+
+            // Обновляем визуальное отображение
+            ratingStars.forEach((s, index) => {
+                if (index < rating) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+
+        // Эффект при наведении
+        star.addEventListener('mouseover', function() {
+            const rating = parseInt(this.dataset.rating);
+            ratingStars.forEach((s, index) => {
+                if (index < rating) {
+                    s.style.color = '#fbbf24';
+                } else {
+                    s.style.color = '#374151';
+                }
+            });
+        });
+    });
+
+    // Сброс при уходе мыши
+    document.querySelector('.rating-input').addEventListener('mouseleave', function() {
+        const currentRating = parseInt(ratingInput.value) || 0;
+        ratingStars.forEach((s, index) => {
+            if (index < currentRating) {
+                s.style.color = '#fbbf24';
+                s.classList.add('active');
+            } else {
+                s.style.color = '#374151';
+                s.classList.remove('active');
+            }
+        });
+    });
+
+    // Обработка отправки формы
+    reviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const reviewData = {
+            id: Date.now(),
+            name: formData.get('reviewName'),
+            email: formData.get('reviewEmail'),
+            service: formData.get('reviewService') || 'Не указана',
+            rating: parseInt(formData.get('reviewRating')),
+            text: formData.get('reviewText'),
+            date: new Date().toISOString().split('T')[0],
+            verified: false
+        };
+
+        // Валидация
+        if (!reviewData.name || !reviewData.rating || !reviewData.text) {
+            alert('Пожалуйста, заполните все обязательные поля!');
+            return;
+        }
+
+        if (reviewData.text.length < 10) {
+            alert('Отзыв должен содержать минимум 10 символов!');
+            return;
+        }
+
+        // Добавляем отзыв
+        addReview(reviewData);
+
+        // Очищаем форму
+        this.reset();
+        ratingInput.value = '';
+        ratingStars.forEach(s => {
+            s.classList.remove('active');
+            s.style.color = '#374151';
+        });
+
+        // Показываем уведомление
+        showNotification('Спасибо за ваш отзыв! Он будет опубликован после модерации.');
+    });
+}
+
+// Добавление нового отзыва
+function addReview(reviewData) {
+    reviews.unshift(reviewData); // Добавляем в начало массива
+    saveReviews();
+    displayReviews();
+    updateStats();
+}
+
+// Сохранение отзывов в localStorage
+function saveReviews() {
+    localStorage.setItem('clientReviews', JSON.stringify(reviews));
+}
+
+// Отображение отзывов
+function displayReviews() {
+    const reviewsGrid = document.getElementById('reviewsGrid');
+    if (!reviewsGrid) return;
+
+    let filteredReviews = reviews;
+
+    // Применяем фильтр
+    if (currentFilter !== 'all') {
+        filteredReviews = reviews.filter(review => review.rating === currentFilter);
+    }
+
+    if (filteredReviews.length === 0) {
+        reviewsGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 2rem;">Отзывов с такой оценкой пока нет</div>';
+        return;
+    }
+
+    reviewsGrid.innerHTML = filteredReviews.map(review => createReviewCard(review)).join('');
+}
+
+// Создание карточки отзыва
+function createReviewCard(review) {
+    const stars = generateStars(review.rating);
+    const initials = review.name.split(' ').map(n => n[0]).join('').toUpperCase();
+    const formattedDate = new Date(review.date).toLocaleDateString('ru-RU');
+
+    return `
+        <div class="review-card" data-rating="${review.rating}">
+            ${review.verified ? '<div class="review-verified">✓ Проверено</div>' : ''}
+            <div class="review-header">
+                <div class="review-author">
+                    <div class="author-avatar">${initials}</div>
+                    <div class="author-info">
+                        <h4>${review.name}</h4>
+                        <p class="review-service">${review.service}</p>
+                    </div>
+                </div>
+                <div class="review-rating">${stars}</div>
+            </div>
+            <div class="review-text">${review.text}</div>
+            <div class="review-date">${formattedDate}</div>
+        </div>
+    `;
+}
+
+// Генерация звезд для рейтинга
+function generateStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars += '<span class="star">★</span>';
+        } else {
+            stars += '<span class="star empty">★</span>';
+        }
+    }
+    return stars;
+}
+
+// Фильтрация отзывов
+function filterReviews(rating) {
+    currentFilter = rating;
+
+    // Обновляем активную кнопку
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    displayReviews();
+}
+
+// Обновление статистики
+function updateStats() {
+    const totalReviews = reviews.length;
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = totalReviews > 0 ? (totalRating / totalReviews).toFixed(1) : 0;
+
+    const totalReviewsEl = document.getElementById('totalReviews');
+    const averageRatingEl = document.getElementById('averageRating');
+
+    if (totalReviewsEl) totalReviewsEl.textContent = totalReviews;
+    if (averageRatingEl) averageRatingEl.textContent = averageRating;
+}
+
+// Уведомления
+function showNotification(message) {
+    // Создаем элемент уведомления
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(45deg, #10b981, #34d399);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease-out;
+        max-width: 300px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    `;
+    notification.textContent = message;
+
+    // Добавляем анимацию
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+    `;
+    if (!document.head.querySelector('[data-notifications]')) {
+        style.setAttribute('data-notifications', 'true');
+        document.head.appendChild(style);
+    }
+
+    document.body.appendChild(notification);
+
+    // Автоматическое скрытие через 5 секунд
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 5000);
+
+    // Закрытие по клику
+    notification.addEventListener('click', () => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    });
+}
+
+// Функции для экспорта отзывов (для админа)
+window.exportReviews = function() {
+    const dataStr = JSON.stringify(reviews, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'reviews.json';
+    link.click();
+    URL.revokeObjectURL(url);
+};
+
+window.clearReviews = function() {
+    if (confirm('Вы уверены, что хотите удалить все отзывы? Это действие нельзя отменить.')) {
+        reviews = [];
+        saveReviews();
+        displayReviews();
+        updateStats();
+        showNotification('Все отзывы удалены');
+    }
+};
+
+window.resetToDefault = function() {
+    if (confirm('Сбросить отзывы к начальному состоянию?')) {
+        reviews = defaultReviews;
+        saveReviews();
+        displayReviews();
+        updateStats();
+        showNotification('Отзывы сброшены к начальному состоянию');
+    }
+};
+</script>
+
+<!-- ДОПОЛНИТЕЛЬНЫЕ ИНСТРУКЦИИ ПО УСТАНОВКЕ -->
+<!--
+ИНСТРУКЦИИ ПО ДОБАВЛЕНИЮ:
+
+1. Вставьте этот код ПЕРЕД секцией "Контакты" в вашем HTML файле
+
+2. Добавьте пункт "Отзывы" в навигацию:
+   Найдите строку:
+   <li class="nav-item"><a href="#contacts" class="nav-link">Контакты</a></li>
+
+   И ПЕРЕД НЕЙ добавьте:
+   <li class="nav-item"><a href="#reviews" class="nav-link">Отзывы</a></li>
+
+3. Если у вас есть AI-чат, обновите его базу знаний:
+   В разделе faq добавьте:
+   "отзывы": "📝 У Льва отличная репутация!\n\n⭐ Средняя оценка: 4.9/5\n👥 Более 15 отзывов от клиентов\n✅ 93% положительных оценок\n\nПосмотреть все отзывы можно в разделе 'Отзывы' на сайте. Там же вы сможете оставить свой отзыв после завершения проекта!"
+
+4. Для добавления кнопки в чат-ассистента:
+   Найдите .chat-quick-buttons и добавьте:
+   <button class="quick-btn" onclick="sendQuickMessage('Покажи отзывы клиентов')">⭐ Отзывы</button>
+
+ВОЗМОЖНОСТИ СИСТЕМЫ:
+- 15 предустановленных отзывов (14 положительных, 1 отрицательный)
+- Фильтрация по рейтингу
+- Форма для добавления новых отзывов
+- Сохранение в localStorage браузера
+- Статистика и аналитика
+- Адаптивный дизайн
+- Уведомления при добавлении отзывов
+
+ФУНКЦИИ ДЛЯ АДМИНИСТРАТОРА (в консоли браузера):
+- exportReviews() - экспорт всех отзывов в JSON
+- clearReviews() - удалить все отзывы
+- resetToDefault() - сбросить к начальным отзывам
+
+КАСТОМИЗАЦИЯ:
+- Измените defaultReviews для добавления своих отзывов
+- Настройте цвета в CSS под ваш дизайн
+- Добавьте модерацию отзывов на сервере
+- Интегрируйте с базой данных для постоянного хранения
+as66
+at77
+ay28
+ai90
+at22
+-->
+<!-- ВСТАВИТЬ В САМЫЙ КОНЕЦ ФАЙЛА ПЕРЕД </body> -->
+
+<style>
+/* Переключатель темы */
+.theme-toggle {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+    padding: 8px 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: #a855f7;
+    transform: translateY(-2px);
+}
+
+.theme-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.sun-icon,
+.moon-icon {
+    position: absolute;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.sun-icon {
+    opacity: 0;
+    transform: rotate(180deg) scale(0);
+}
+
+.moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* Состояние светлой темы для иконки */
+body.light-theme .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+body.light-theme .moon-icon {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0);
+}
+
+/* СВЕТЛАЯ ТЕМА */
+body.light-theme {
+    background-color: #ffffff;
+    color: #1a1a1a;
+}
+
+/* Навигация в светлой теме */
+body.light-theme .navbar {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+}
+
+body.light-theme .nav-logo h2 {
+    color: #7c3aed;
+}
+
+body.light-theme .nav-link {
+    color: #374151;
+}
+
+body.light-theme .nav-link:hover,
+body.light-theme .nav-link.active {
+    color: #7c3aed;
+}
+
+/* Главная секция */
+body.light-theme .hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+body.light-theme .hero-title {
+    background: linear-gradient(45deg, #374151, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.light-theme .hero-subtitle {
+    color: #6b7280;
+}
+
+/* Секции */
+body.light-theme .about {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 50%, #f9fafb 100%);
+}
+
+body.light-theme .services {
+    background: #ffffff;
+}
+
+body.light-theme .portfolio {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+body.light-theme .blog {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+body.light-theme .order {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+body.light-theme .reviews {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+body.light-theme .contacts {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+/* Заголовки секций */
+body.light-theme .section-title {
+    color: #7c3aed;
+}
+
+/* Карточки */
+body.light-theme .service-card,
+body.light-theme .portfolio-item,
+body.light-theme .blog-post,
+body.light-theme .review-card,
+body.light-theme .add-review-section,
+body.light-theme .order-form-container,
+body.light-theme .stats-item {
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border: 1px solid rgba(168, 85, 247, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .service-card:hover,
+body.light-theme .portfolio-item:hover,
+body.light-theme .blog-post:hover,
+body.light-theme .review-card:hover {
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.3);
+}
+
+/* Текст */
+body.light-theme .about-text p,
+body.light-theme .service-card p,
+body.light-theme .portfolio-content p,
+body.light-theme .blog-post p,
+body.light-theme .review-text,
+body.light-theme .stats-label,
+body.light-theme .blog-full-text {
+    color: #6b7280;
+}
+
+body.light-theme .service-card h3,
+body.light-theme .portfolio-content h3,
+body.light-theme .blog-post h3,
+body.light-theme .author-info h4,
+body.light-theme .contact-info h3,
+body.light-theme .contact-form h3,
+body.light-theme .add-review-section h3 {
+    color: #7c3aed;
+}
+
+/* Формы */
+body.light-theme .contact-form input,
+body.light-theme .contact-form textarea,
+body.light-theme .order-form input,
+body.light-theme .order-form select,
+body.light-theme .order-form textarea,
+body.light-theme .review-form input,
+body.light-theme .review-form select,
+body.light-theme .review-form textarea {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+}
+
+body.light-theme .contact-form input:focus,
+body.light-theme .contact-form textarea:focus,
+body.light-theme .order-form input:focus,
+body.light-theme .order-form select:focus,
+body.light-theme .order-form textarea:focus,
+body.light-theme .review-form input:focus,
+body.light-theme .review-form select:focus,
+body.light-theme .review-form textarea:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.1);
+}
+
+body.light-theme .contact-form input::placeholder,
+body.light-theme .contact-form textarea::placeholder,
+body.light-theme .order-form input::placeholder,
+body.light-theme .order-form textarea::placeholder,
+body.light-theme .review-form input::placeholder,
+body.light-theme .review-form textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Лейблы форм */
+body.light-theme .review-form label,
+body.light-theme .order-form label {
+    color: #7c3aed;
+}
+
+/* Кнопки */
+body.light-theme .btn-primary {
+    background: linear-gradient(45deg, #7c3aed, #8b5cf6);
+}
+
+body.light-theme .btn-secondary {
+    color: #7c3aed;
+    border-color: #7c3aed;
+}
+
+body.light-theme .btn-secondary:hover {
+    background: #7c3aed;
+}
+
+/* Навыки */
+body.light-theme .skill {
+    background: linear-gradient(45deg, #7c3aed, #8b5cf6);
+}
+
+/* Фильтры */
+body.light-theme .filter-btn,
+body.light-theme .quick-btn {
+    background: rgba(124, 58, 237, 0.1);
+    border-color: rgba(124, 58, 237, 0.3);
+    color: #7c3aed;
+}
+
+body.light-theme .filter-btn:hover,
+body.light-theme .filter-btn.active,
+body.light-theme .quick-btn:hover {
+    background: rgba(124, 58, 237, 0.2);
+    border-color: #7c3aed;
+}
+
+/* Подвал */
+body.light-theme .footer {
+    background: #ffffff;
+    border-top: 1px solid rgba(168, 85, 247, 0.1);
+}
+
+body.light-theme .footer p {
+    color: #9ca3af;
+}
+
+/* Чат в светлой теме */
+body.light-theme .chat-container {
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .chat-header {
+    background: linear-gradient(90deg, #7c3aed, #8b5cf6);
+}
+
+body.light-theme .assistant-message .message-content {
+    background: rgba(124, 58, 237, 0.1);
+    color: #374151;
+}
+
+body.light-theme .user-message .message-content {
+    background: rgba(16, 185, 129, 0.1);
+    color: #374151;
+}
+
+body.light-theme #chatInput {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+}
+
+body.light-theme #chatInput:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.1);
+}
+
+body.light-theme #chatInput::placeholder {
+    color: #9ca3af;
+}
+
+body.light-theme .chat-typing {
+    color: #7c3aed;
+}
+
+body.light-theme .typing-dots span {
+    background: #7c3aed;
+}
+
+/* Контакты */
+body.light-theme .contact-item {
+    color: #6b7280;
+}
+
+/* Отзывы */
+body.light-theme .review-date {
+    color: #9ca3af;
+}
+
+body.light-theme .review-service {
+    color: #7c3aed;
+}
+
+/* Портфолио */
+body.light-theme .portfolio-tech span {
+    background: rgba(124, 58, 237, 0.1);
+    color: #7c3aed;
+}
+
+/* Блог */
+body.light-theme .blog-date {
+    color: #7c3aed;
+}
+
+body.light-theme .read-more {
+    color: #7c3aed;
+}
+
+body.light-theme .read-more:hover {
+    color: #6d28d9;
+}
+
+/* Адаптивность переключателя */
+@media (max-width: 768px) {
+    .theme-toggle {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+
+    .theme-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sun-icon,
+    .moon-icon {
+        font-size: 1rem;
+    }
+}
+</style>
+
+<script>
+// Система переключения темы
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем сохраненную тему
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+    }
+
+    // Обновляем статус чата при смене темы
+    updateChatTheme();
+});
+
+// Переключение темы
+function toggleTheme() {
+    const body = document.body;
+    const isLight = body.classList.contains('light-theme');
+
+    if (isLight) {
+        // Переключаемся на темную тему
+        body.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+        showThemeNotification('Переключено на темную тему 🌙');
+    } else {
+        // Переключаемся на светлую тему
+        body.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+        showThemeNotification('Переключено на светлую тему ☀️');
+    }
+
+    // Обновляем чат
+    updateChatTheme();
+}
+
+// Обновление темы чата
+function updateChatTheme() {
+    const statusElement = document.getElementById('statusText');
+    if (statusElement && document.body.classList.contains('light-theme')) {
+        // В светлой теме обновляем цвета статуса
+        const currentColor = statusElement.parentElement.style.color;
+        if (currentColor === 'rgb(16, 185, 129)') { // зеленый в темной теме
+            statusElement.parentElement.style.color = '#059669'; // зеленый в светлой теме
+        } else if (currentColor === 'rgb(251, 191, 36)') { // желтый в темной теме
+            statusElement.parentElement.style.color = '#d97706'; // желтый в светлой теме
+        }
+    }
+}
+
+// Уведомление о смене темы
+function showThemeNotification(message) {
+    // Создаем уведомление
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(45deg, #7c3aed, #8b5cf6);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease-out;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        max-width: 250px;
+    `;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    // Автоматическое скрытие через 3 секунды
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+
+    // Закрытие по клику
+    notification.addEventListener('click', () => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    });
+}
+
+// Функции для программного переключения (для консоли)
+window.setLightTheme = function() {
+    document.body.classList.add('light-theme');
+    localStorage.setItem('theme', 'light');
+    updateChatTheme();
+    showThemeNotification('Установлена светлая тема ☀️');
+};
+
+window.setDarkTheme = function() {
+    document.body.classList.remove('light-theme');
+    localStorage.setItem('theme', 'dark');
+    updateChatTheme();
+    showThemeNotification('Установлена темная тема 🌙');
+};
+
+window.resetTheme = function() {
+    document.body.classList.remove('light-theme');
+    localStorage.removeItem('theme');
+    updateChatTheme();
+    showThemeNotification('Тема сброшена к темной 🌙');
+};
+</script>
+<!-- Подвал -->
+<footer class="footer">
+    <div class="container">
+        <p>Основан в 2024 году. Все права защищены.</p>
+    </div>
+</footer>
+
+<script>
+    // Здесь может быть ваш JavaScript-код
+</script>
+</body>
+</html>
