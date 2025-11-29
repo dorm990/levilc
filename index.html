@@ -647,6 +647,7 @@
             <li class="nav-item"><a href="#order" class="nav-link">Заказать</a></li>
             <li class="nav-item"><a href="#reviews" class="nav-link">Отзывы</a></li>
             <li class="nav-item"><a href="#contacts" class="nav-link">Контакты</a></li>
+            <li class="nav-item"><a href="#templates" class="nav-link">Шаблоны</a></li>
             <li class="nav-item">
                 <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">
                     <div class="theme-icon">
@@ -1430,7 +1431,945 @@ ${data.projectDescription}
     }
 });
 </script>
+<!-- ВСТАВЬТЕ ЭТОТ КОД ПРЯМО ПЕРЕД СЕКЦИЕЙ КОНТАКТОВ (ПЕРЕД <section id="contacts" class="contacts">) -->
 
+<!-- Секция Шаблоны -->
+<section id="templates" class="templates">
+    <div class="container">
+        <h2 class="section-title">Готовые шаблоны сайтов</h2>
+        <p class="section-subtitle">Качественные шаблоны с полной адаптацией под ваш бизнес</p>
+
+        <!-- Фильтры шаблонов -->
+        <div class="templates-filters">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="business">Для бизнеса</button>
+            <button class="filter-btn" data-filter="portfolio">Портфолио</button>
+            <button class="filter-btn" data-filter="ecommerce">Интернет-магазин</button>
+            <button class="filter-btn" data-filter="landing">Лендинг</button>
+            <button class="filter-btn" data-filter="blog">Блог</button>
+        </div>
+
+        <!-- Сетка шаблонов -->
+        <div class="templates-grid" id="templatesGrid">
+            <!-- Шаблоны будут загружены через JavaScript -->
+        </div>
+
+        <!-- Преимущества -->
+        <div class="templates-benefits">
+            <h3>Почему выбирают наши шаблоны?</h3>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">✔︎</div>
+                    <h4>Быстрый запуск</h4>
+                    <p>Сайт будет готов за 1-3 дня с полной адаптацией</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✔︎</div>
+                    <h4>Адаптивный дизайн</h4>
+                    <p>Идеальное отображение на всех устройствах</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✔︎</div>
+                    <h4>Индивидуальная настройка</h4>
+                    <p>Подберем цвета, шрифты и контент под ваш бренд</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✔︎</div>
+                    <h4>Техподдержка</h4>
+                    <p>Помощь в настройке и обучение управлению сайтом</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Процесс работы -->
+        <div class="work-process">
+            <h3>Как происходит адаптация шаблона?</h3>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Выбор шаблона</h4>
+                    <p>Выбираете понравившийся шаблон из каталога</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Обсуждение деталей</h4>
+                    <p>Согласовываем цвета, контент и функционал</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Адаптация</h4>
+                    <p>Настраиваем шаблон под ваш бизнес и бренд</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Запуск</h4>
+                    <p>Размещаем сайт в интернете и обучаем управлению</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA секция -->
+        <div class="templates-cta">
+            <h3>Нужен уникальный дизайн?</h3>
+            <p>Мы также создаем сайты с нуля по вашим требованиям</p>
+            <div class="cta-buttons">
+                <a href="#order" class="btn btn-primary">Заказать сайт с нуля</a>
+                <a href="#contacts" class="btn btn-secondary">Консультация</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Модальное окно шаблона -->
+<div id="templateModal" class="modal">
+    <div class="modal-content template-modal">
+        <span class="modal-close">&times;</span>
+        <div class="modal-body">
+            <div class="template-modal-content">
+                <div class="template-preview">
+                    <img id="modalTemplateImage" src="" alt="">
+                    <div class="template-actions">
+                        <button class="btn btn-primary" onclick="orderTemplate()">Заказать адаптацию</button>
+                        <button class="btn btn-secondary" onclick="viewDemo()">Посмотреть демо</button>
+                    </div>
+                </div>
+                <div class="template-details">
+                    <h3 id="modalTemplateTitle"></h3>
+                    <div class="template-price">
+                        <span class="price-old" id="modalPriceOld"></span>
+                        <span class="price-current" id="modalPriceCurrent"></span>
+                    </div>
+                    <div class="template-features">
+                        <h4>Особенности шаблона:</h4>
+                        <ul id="modalFeaturesList"></ul>
+                    </div>
+                    <div class="template-description">
+                        <p id="modalDescription"></p>
+                    </div>
+                    <div class="template-tech">
+                        <h4>Технологии:</h4>
+                        <div class="tech-tags" id="modalTechTags"></div>
+                    </div>
+                    <div class="template-customization">
+                        <h4>Что входит в адаптацию:</h4>
+                        <ul>
+                            <li>✅ Изменение цветовой схемы под ваш бренд</li>
+                            <li>✅ Настройка шрифтов и типографики</li>
+                            <li>✅ Добавление вашего контента и изображений</li>
+                            <li>✅ Интеграция с вашими соцсетями</li>
+                            <li>✅ Настройка контактной формы</li>
+                            <li>✅ Базовая SEO оптимизация</li>
+                            <li>✅ Обучение управлению сайтом</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Стили для секции шаблонов */
+.templates {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+    padding: 80px 0;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #cccccc;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.templates-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: #a855f7;
+    transform: translateY(-2px);
+}
+
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.template-card {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    position: relative;
+}
+
+.template-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(168, 85, 247, 0.3);
+}
+
+.template-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(45deg, #10b981, #34d399);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.template-image {
+    height: 200px;
+    background: linear-gradient(45deg, #2a1a4a, #4a2a6a);
+    overflow: hidden;
+    position: relative;
+}
+
+.template-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.template-card:hover .template-image img {
+    transform: scale(1.05);
+}
+
+.template-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.template-card:hover .template-overlay {
+    opacity: 1;
+}
+
+.template-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.template-content {
+    padding: 1.5rem;
+}
+
+.template-title {
+    color: #a855f7;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.template-description {
+    color: #cccccc;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.template-price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.price-old {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+.price-current {
+    color: #10b981;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.template-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-tag {
+    background: rgba(168, 85, 247, 0.1);
+    color: #a855f7;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.template-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.template-category {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+/* Преимущества */
+.templates-benefits {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 3rem;
+    border-radius: 20px;
+    margin: 4rem 0;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.templates-benefits h3 {
+    text-align: center;
+    color: #a855f7;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-item {
+    text-align: center;
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.benefit-item h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.benefit-item p {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+/* Процесс работы */
+.work-process {
+    margin: 4rem 0;
+}
+
+.work-process h3 {
+    text-align: center;
+    color: #a855f7;
+    margin-bottom: 3rem;
+    font-size: 1.8rem;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.process-step {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.process-step h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.process-step p {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+/* CTA секция */
+.templates-cta {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.templates-cta h3 {
+    color: #a855f7;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.templates-cta p {
+    color: #cccccc;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Модальное окно шаблона */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #1a1a1a, #2a1a4a);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.template-modal {
+    max-width: 1000px;
+    width: 95%;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #cccccc;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #a855f7;
+}
+
+.template-modal-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.template-preview img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.template-details h3 {
+    color: #a855f7;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.template-features ul,
+.template-customization ul {
+    color: #cccccc;
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.template-features li,
+.template-customization li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.tech-tag {
+    background: rgba(168, 85, 247, 0.1);
+    color: #a855f7;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .templates-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .template-modal-content {
+        grid-template-columns: 1fr;
+    }
+
+    .benefits-grid,
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .templates-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .templates-benefits,
+    .templates-cta {
+        padding: 2rem 1rem;
+    }
+
+    .template-content {
+        padding: 1rem;
+    }
+}
+</style>
+
+<script>
+// База данных шаблонов
+const templatesDatabase = [
+    {
+        id: 1,
+        title: "Business Pro",
+        category: "business",
+        price: 2500,
+        oldPrice: 5000,
+        image: "",
+        demoUrl: "#",
+        description: "Профессиональный шаблон для бизнеса с современным дизайном и полным набором функций для корпоративного сайта.",
+        features: [
+            "Главная страница с услугами",
+            "Страница о компании",
+            "Блог с категориями",
+            "Контактная форма",
+            "Отзывы клиентов",
+            "FAQ раздел"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "PHP"],
+        popular: true
+    },
+    {
+        id: 2,
+        title: "Creative Portfolio",
+        category: "portfolio",
+        price: 2500,
+        oldPrice: 5000,
+        image: "",
+        demoUrl: "#",
+        description: "Элегантный шаблон для творческих профессионалов с акцентом на визуальное представление работ.",
+        features: [
+            "Сетка портфолио",
+            "Фильтрация проектов",
+            "Детальные страницы работ",
+            "Блог",
+            "Контактная форма",
+            "Социальные сети"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript", "jQuery"],
+        popular: false
+    },
+    {
+        id: 3,
+        title: "E-Shop Lite",
+        category: "ecommerce",
+        price: 2500,
+        oldPrice: 5000,
+        image: "",
+        demoUrl: "#",
+        description: "Функциональный шаблон интернет-магазина с корзиной, фильтрами и системой управления товарами.",
+        features: [
+            "Каталог товаров",
+            "Корзина покупок",
+            "Фильтры и поиск",
+            "Страница товара",
+            "Оформление заказа",
+            "Личный кабинет"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
+        popular: true
+    },
+    {
+        id: 4,
+        title: "Startup Landing",
+        category: "landing",
+        price: 2000,
+        oldPrice: 6000,
+        image: "",
+        demoUrl: "#",
+        description: "Эффектный лендинг для стартапов и промо-кампаний с высокой конверсией.",
+        features: [
+            "Герой-секция",
+            "Преимущества",
+            "Отзывы",
+            "FAQ",
+            "Призыв к действию",
+            "Социальные доказательства"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript"],
+        popular: false
+    },
+    {
+        id: 5,
+        title: "Blog Master",
+        category: "blog",
+        price: 1000,
+        oldPrice: 4000,
+        image: "",
+        demoUrl: "#",
+        description: "Современный блог-шаблон с удобным управлением контентом и социальными функциями.",
+        features: [
+            "Лента статей",
+            "Категории и теги",
+            "Поиск по блогу",
+            "Комментарии",
+            "Социальные кнопки",
+            "Подписка на рассылку"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript", "PHP"],
+        popular: false
+    },
+    {
+        id: 6,
+        title: "Corporate Business",
+        category: "business",
+        price: 3000,
+        oldPrice: 8000,
+        image: "",
+        demoUrl: "#",
+        description: "Солидный шаблон для крупных компаний с расширенным функционалом и многоязычной поддержкой.",
+        features: [
+            "Многостраничная структура",
+            "Команда сотрудников",
+            "Партнеры и клиенты",
+            "Новости компании",
+            "Вакансии",
+            "Многоязычность"
+        ],
+        technologies: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "PHP"],
+        popular: true
+    }
+];
+
+let currentFilter = 'all';
+let currentTemplate = null;
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Инициализация шаблонов...');
+    renderTemplates();
+    initializeTemplateFilters();
+    initializeTemplateModal();
+});
+
+// Рендеринг шаблонов
+function renderTemplates() {
+    const templatesGrid = document.getElementById('templatesGrid');
+    if (!templatesGrid) {
+        console.error('Элемент templatesGrid не найден!');
+        return;
+    }
+
+    const filteredTemplates = currentFilter === 'all'
+        ? templatesDatabase
+        : templatesDatabase.filter(template => template.category === currentFilter);
+
+    templatesGrid.innerHTML = '';
+
+    filteredTemplates.forEach(template => {
+        const templateCard = createTemplateCard(template);
+        templatesGrid.appendChild(templateCard);
+    });
+
+    // Запускаем анимацию после рендеринга
+    setTimeout(animateTemplateElements, 100);
+}
+
+// Создание карточки шаблона
+function createTemplateCard(template) {
+    const card = document.createElement('div');
+    card.className = 'template-card fade-in';
+    card.setAttribute('data-category', template.category);
+
+    card.innerHTML = `
+        ${template.popular ? '<div class="template-badge">Популярный</div>' : ''}
+        <div class="template-image">
+            <img src="${template.image}" alt="${template.title}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMmExYTRhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iI2E4NTVmNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPiR7dGVtcGxhdGUudGl0bGV9PC90ZXh0Pjwvc3ZnPg=='">
+            <div class="template-overlay">
+                <div class="template-actions">
+                    <button class="btn btn-primary" onclick="openTemplateModal(${template.id})">Подробнее</button>
+                    <button class="btn btn-secondary" onclick="viewTemplateDemo('${template.demoUrl}')">Демо</button>
+                </div>
+            </div>
+        </div>
+        <div class="template-content">
+            <h3 class="template-title">${template.title}</h3>
+            <p class="template-description">${template.description}</p>
+            <div class="template-price">
+                <span class="price-old">${template.oldPrice.toLocaleString()} ₽</span>
+                <span class="price-current">${template.price.toLocaleString()} ₽</span>
+            </div>
+            <div class="template-features">
+                ${template.features.slice(0, 3).map(feature =>
+                    `<span class="feature-tag">${feature}</span>`
+                ).join('')}
+            </div>
+            <div class="template-footer">
+                <span class="template-category">${getCategoryName(template.category)}</span>
+                <button class="btn btn-primary" onclick="orderTemplate(${template.id})">Заказать</button>
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+// Инициализация фильтров
+function initializeTemplateFilters() {
+    const filterBtns = document.querySelectorAll('.templates-filters .filter-btn');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Удаляем активный класс у всех кнопок
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Добавляем активный класс к текущей кнопке
+            this.classList.add('active');
+
+            // Применяем фильтр
+            currentFilter = this.dataset.filter;
+            renderTemplates();
+        });
+    });
+}
+
+// Получение названия категории
+function getCategoryName(category) {
+    const categories = {
+        'business': 'Для бизнеса',
+        'portfolio': 'Портфолио',
+        'ecommerce': 'Интернет-магазин',
+        'landing': 'Лендинг',
+        'blog': 'Блог'
+    };
+    return categories[category] || category;
+}
+
+// Открытие модального окна шаблона
+function openTemplateModal(templateId) {
+    const template = templatesDatabase.find(t => t.id === templateId);
+    if (!template) return;
+
+    currentTemplate = template;
+
+    // Заполняем модальное окно данными
+    document.getElementById('modalTemplateTitle').textContent = template.title;
+    document.getElementById('modalTemplateImage').src = template.image;
+    document.getElementById('modalPriceOld').textContent = `${template.oldPrice.toLocaleString()} ₽`;
+    document.getElementById('modalPriceCurrent').textContent = `${template.price.toLocaleString()} ₽`;
+    document.getElementById('modalDescription').textContent = template.description;
+
+    // Заполняем особенности
+    const featuresList = document.getElementById('modalFeaturesList');
+    featuresList.innerHTML = template.features.map(feature =>
+        `<li>${feature}</li>`
+    ).join('');
+
+    // Заполняем технологии
+    const techTags = document.getElementById('modalTechTags');
+    techTags.innerHTML = template.technologies.map(tech =>
+        `<span class="tech-tag">${tech}</span>`
+    ).join('');
+
+    // Показываем модальное окно
+    document.getElementById('templateModal').style.display = 'flex';
+}
+
+// Инициализация модального окна
+function initializeTemplateModal() {
+    const modal = document.getElementById('templateModal');
+    if (!modal) return;
+
+    const closeBtn = modal.querySelector('.modal-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeTemplateModal);
+    }
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeTemplateModal();
+        }
+    });
+}
+
+// Закрытие модального окна
+function closeTemplateModal() {
+    document.getElementById('templateModal').style.display = 'none';
+}
+
+// Просмотр демо шаблона
+function viewTemplateDemo(url) {
+    if (url && url !== '#') {
+        window.open(url, '_blank');
+    } else {
+        alert('Демо-версия временно недоступна. Свяжитесь с нами для получения подробной информации.');
+    }
+}
+
+// Заказ шаблона
+function orderTemplate(templateId = null) {
+    const template = templateId ? templatesDatabase.find(t => t.id === templateId) : currentTemplate;
+
+    if (template) {
+        // Закрываем модальное окно
+        closeTemplateModal();
+
+        // Прокручиваем к форме заказа
+        const orderSection = document.getElementById('order');
+        if (orderSection) {
+            orderSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Заполняем форму заказа данными о шаблоне
+            setTimeout(() => {
+                const serviceSelect = document.getElementById('serviceType');
+                const descriptionTextarea = document.getElementById('projectDescription');
+
+                if (serviceSelect) {
+                    serviceSelect.value = 'website';
+                }
+
+                if (descriptionTextarea) {
+                    descriptionTextarea.value = `Заинтересован в шаблоне: ${template.title}\n\nОсновные требования:\n- Адаптация дизайна под мой бренд\n- Замена контента на мой\n- Настройка функционала\n- Обучение управлению сайтом\n\nБюджет: ${template.price.toLocaleString()} ₽`;
+                    descriptionTextarea.focus();
+                }
+            }, 500);
+        } else {
+            alert('Раздел "Заказать" не найден на странице');
+        }
+    } else {
+        // Если шаблон не выбран, просто прокручиваем к форме
+        const orderSection = document.getElementById('order');
+        if (orderSection) {
+            orderSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+}
+
+// Просмотр демо из модального окна
+function viewDemo() {
+    if (currentTemplate) {
+        viewTemplateDemo(currentTemplate.demoUrl);
+    }
+}
+
+// Анимация появления элементов
+function animateTemplateElements() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.template-card').forEach(card => {
+        observer.observe(card);
+    });
+}
+
+// Добавляем обработчик для кнопки в навигации
+document.addEventListener('DOMContentLoaded', function() {
+    // Добавляем пункт в навигацию если его нет
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu && !document.querySelector('a[href="#templates"]')) {
+        const templatesNavItem = document.createElement('li');
+        templatesNavItem.className = 'nav-item';
+        templatesNavItem.innerHTML = '<a href="#templates" class="nav-link">Шаблоны</a>';
+        navMenu.appendChild(templatesNavItem);
+    }
+});
+</script>
     <!-- Секция Контакты -->
     <section id="contacts" class="contacts">
         <div class="container">
@@ -1993,9 +2932,9 @@ const SYSTEM_PROMPT = `Ты AI-ассистент на сайте Льва - Fro
 - Отличные отзывы клиентов: средняя оценка 4.9/5 из 15+ отзывов
 
 УСЛУГИ И ЦЕНЫ:
-1. Разработка сайтов: от 30,000 ₽, сроки 2-4 недели
-2. Telegram боты: от 15,000 ₽, сроки 1-2 недели
-3. Мини-приложения: от 25,000 ₽, сроки 2-3 недели
+1. Разработка сайтов: от 5,000 ₽, сроки 1-2 недели
+2. Telegram боты: от 3,000 ₽, сроки 1-2 недели
+3. Мини-приложения: от 8,000 ₽, сроки 2 недели
 
 ТЕХНОЛОГИИ: HTML5, CSS3, JavaScript, React, Node.js, Python, PostgreSQL, MongoDB
 
@@ -2015,30 +2954,30 @@ const knowledgeBase = {
     services: {
         website: {
             name: "Разработка сайтов",
-            price: "от 30,000 ₽",
-            time: "2-4 недели",
+            price: "от 5,000 ₽",
+            time: "1-2 недели",
             description: "Создаю современные адаптивные сайты с красивым дизайном и быстрой загрузкой"
         },
         bot: {
             name: "Telegram боты",
-            price: "от 15,000 ₽",
+            price: "от 3,000 ₽",
             time: "1-2 недели",
             description: "Разрабатываю умных ботов для автоматизации бизнеса и взаимодействия с клиентами"
         },
         app: {
             name: "Мини-приложения",
-            price: "от 25,000 ₽",
-            time: "2-3 недели",
+            price: "от 8,000 ₽",
+            time: "2 недели",
             description: "Создаю интерактивные мини-приложения для различных платформ"
         }
     },
 
     faq: {
-        "сколько стоит": "Стоимость зависит от сложности проекта:\n• Простой сайт: 30,000-50,000 ₽\n• Telegram бот: 15,000-40,000 ₽\n• Мини-приложение: 25,000-60,000 ₽\n\nТочную стоимость рассчитаю после обсуждения ваших требований.",
+        "сколько стоит": "Стоимость зависит от сложности проекта:\n• Простой сайт: 5,000-6,000 ₽\n• Telegram бот: 3,000-5,000 ₽\n• Мини-приложение: 8,000-10,000 ₽\n\nТочную стоимость рассчитаю после обсуждения ваших требований.",
 
-        "сколько времени": "Сроки разработки:\n• Простой сайт: 2-3 недели\n• Сложный сайт: 3-6 недель\n• Telegram бот: 1-2 недели\n• Мини-приложение: 2-4 недели\n\nСроки могут варьироваться в зависимости от сложности проекта.",
+        "сколько времени": "Сроки разработки:\n• Простой сайт: пара дней\n• Сложный сайт: 1 неделя\n• Telegram бот: 1-2 недели\n• Мини-приложение: 1 неделя\n\nСроки могут варьироваться в зависимости от сложности проекта.",
 
-        "связаться": "Связаться со мной можно:\n📧 Email: o08LeV80o@gmail.com\n📱 Телефон: +7 (952) 720-43-23\n✈️ Telegram: @dorm990\n\nОтвечаю в течение 1-2 часов в рабочее время.",
+        "связаться": "Связаться со мной можно:\n📧 Email: o08LeV80o@gmail.com\n📱 Телефон: +7 (952) 720-43-23\n✈️ Telegram: @dorm990\n\nОтвечаю в течение пары минут в рабочее время.",
 
         "отзывы": "📝 **Отзывы клиентов о Льве:**\n\n⭐ Средняя оценка: **4.9/5**\n👥 Более **15 отзывов** от реальных клиентов\n✅ **93% положительных** оценок\n\n**Последние отзывы:**\n• \"Отличная работа! Сайт превзошел ожидания\" ⭐⭐⭐⭐⭐\n• \"Telegram бот увеличил продажи на 30%\" ⭐⭐⭐⭐⭐\n• \"Профессиональный подход, всё в срок\" ⭐⭐⭐⭐⭐\n\n🔍 Посмотреть все отзывы можно в разделе **\"Отзывы\"** на сайте!\n\nТам же вы сможете оставить свой отзыв после работы с Львом 😊"
     }
@@ -3723,6 +4662,7 @@ window.resetTheme = function() {
     showThemeNotification('Тема сброшена к темной 🌙');
 };
 </script>
+
 <!-- Подвал -->
 <footer class="footer">
     <div class="container">
